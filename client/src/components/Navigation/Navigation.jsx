@@ -1,15 +1,17 @@
 import React from 'react'
 
-import {NavItem} from './NavItem'
+import { NavItem } from './NavItem'
 
-import useUser from "../../services/user/use";
+import useUser from '../../services/user/use'
 
 import './style.css'
 
 const Navigation = () => {
-    const { state:{user} } = useUser()
+    const {
+        state: { user },
+    } = useUser()
 
-    console.log(user);
+    console.log(user)
     return (
         <nav className="navbar navbar-expand-sm navbar-light bg-light px-3">
             <div className="container-md">
@@ -35,19 +37,39 @@ const Navigation = () => {
                         <NavItem to="/Main" className="nav-link">
                             Main
                         </NavItem>
-                        <NavItem to="/Secured" className="nav-link" doShow={user?true:false}>
+                        <NavItem
+                            to="/Secured"
+                            className="nav-link"
+                            doShow={user ? true : false}
+                        >
                             Secured
                         </NavItem>
-                        <NavItem to="/Products" className="nav-link" doShow={user?true:false}>
+                        <NavItem
+                            to="/Products"
+                            className="nav-link"
+                            doShow={user ? true : false}
+                        >
                             Products
                         </NavItem>
-                        <NavItem to="/Users" className="nav-link" doShow={user?true:false}>
+                        <NavItem
+                            to="/Users"
+                            className="nav-link"
+                            doShow={user ? true : false}
+                        >
                             Users
                         </NavItem>
-                        <NavItem to="/Auth" className="nav-link" doShow={user?false:true}>
+                        <NavItem
+                            to="/Auth"
+                            className="nav-link"
+                            doShow={user ? false : true}
+                        >
                             Auth
                         </NavItem>
-                        <NavItem to="/logout" className="nav-link" doShow={user?true:false}>
+                        <NavItem
+                            to="/logout"
+                            className="nav-link"
+                            doShow={user ? true : false}
+                        >
                             Logout ({user && user.email})
                         </NavItem>
                     </div>

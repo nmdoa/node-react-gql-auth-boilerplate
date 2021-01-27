@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useManualQuery } from 'graphql-hooks'
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 // import { loginUser, useAuthState, useAuthDispatch } from '../context'
 
@@ -8,12 +8,17 @@ import './Auth.css'
 import { setTokens, setUserInfo } from '../services/TokenManager'
 import { LOGIN_USER } from '../graphql/user'
 
-import useUser from "../services/user/use";
+import useUser from '../services/user/use'
 import Button from '../components/Button'
 
 const Auth = (props) => {
-    const referer = (props.location && props.location.state && props.location.state.from) || '/';
-    const { state:{user}, actions:{setUser} } = useUser()
+    const referer =
+        (props.location && props.location.state && props.location.state.from) ||
+        '/'
+    const {
+        state: { user },
+        actions: { setUser },
+    } = useUser()
     const [loginUser, { loading }] = useManualQuery(LOGIN_USER)
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
@@ -36,14 +41,13 @@ const Auth = (props) => {
                 email: email,
             })
             setTokens(token, refreshToken)
-
         }
     }
 
     let formClassNames = 'form-control'
     formError && (formClassNames += ' is-invalid')
 
-    if(user) return (<Redirect to={referer} />);
+    if (user) return <Redirect to={referer} />
 
     return (
         <div className="container-sm login">

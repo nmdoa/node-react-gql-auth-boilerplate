@@ -1,5 +1,5 @@
-import { createContext } from 'react';
+import { createContext } from 'react'
 
-const UserContext = createContext({state: {}, actions: {}});
+const UserContext = createContext({ state: {}, actions: {} })
 
-export default UserContext;
+export default UserContext

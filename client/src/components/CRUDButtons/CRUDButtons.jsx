@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const CRUDButtons = ({object, onDelete, onUpdate}) => {
+export const CRUDButtons = ({ object, onDelete, onUpdate }) => {
     return (
         <div
             className="btn-group btn-group-sm"
@@ -10,10 +10,18 @@ export const CRUDButtons = ({object, onDelete, onUpdate}) => {
             <button type="button" className="btn btn-outline-info">
                 view
             </button>
-            <button type="button" className="btn btn-outline-secondary" onClick={() => onUpdate(object)}>
+            <button
+                type="button"
+                className="btn btn-outline-secondary"
+                onClick={() => onUpdate(object)}
+            >
                 edit
             </button>
-            <button type="button" className="btn btn-outline-danger" onClick={() => onDelete(object._id)}>
+            <button
+                type="button"
+                className="btn btn-outline-danger"
+                onClick={() => onDelete(object._id)}
+            >
                 delete
             </button>
         </div>

@@ -17,7 +17,7 @@ import ProductsPage from './pages/Products'
 import Navbar from './components/Navigation/Navigation'
 import './App.css'
 
-import UserProvider from "./services/user/provider";
+import UserProvider from './services/user/provider'
 
 function App() {
     const [user, setUser] = useState(getUserInfo())

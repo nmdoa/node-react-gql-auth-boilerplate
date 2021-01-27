@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { useQuery } from 'graphql-hooks'
 
 import List from '../components/List'
 
-import {PRODUCTS_LIST_SHORT} from '../graphql/products'
+import { PRODUCTS_LIST_SHORT } from '../graphql/products'
 
 const listSchema = [0, 4, 3, 3, 2]
 
@@ -20,11 +20,16 @@ const Products = () => {
     if (!data) return 'Loading...'
     if (error) return 'Something Bad Happened'
 
-    const {products} = data
+    const { products } = data
 
     return (
         <React.Fragment>
-            <List model={products} onDelete={handleOnDelete} onUpdate={onUpdate} schema={listSchema} />
+            <List
+                model={products}
+                onDelete={handleOnDelete}
+                onUpdate={onUpdate}
+                schema={listSchema}
+            />
         </React.Fragment>
     )
 }

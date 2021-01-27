@@ -12,8 +12,8 @@ const listSchema = [0, 5, 5, 2]
 
 const Users = () => {
     const paginationLimit = 10
-    const [addUser, {loading:loadingAdd}] = useMutation(ADD_USER)
-    const [updateUser, {loading:loadingUpdate}] = useMutation(UPDATE_USER)
+    const [addUser, { loading: loadingAdd }] = useMutation(ADD_USER)
+    const [updateUser, { loading: loadingUpdate }] = useMutation(UPDATE_USER)
     const [isModalShown, setIsModalShown] = useState(false)
     const [skipCount, setSkipCount] = useState(0)
     const [updatingId, setUpdatingId] = useState(false)
@@ -24,18 +24,18 @@ const Users = () => {
     const emailRef = useRef()
     const passwordRef = useRef()
 
-    const [deleteUser] = useMutation(DELETE_USER);
+    const [deleteUser] = useMutation(DELETE_USER)
     const handleOnDelete = async (id) => {
-        if(window.confirm('Are you sure you want to Delete selected user?')) {
-            await deleteUser({variables:{id}})
+        if (window.confirm('Are you sure you want to Delete selected user?')) {
+            await deleteUser({ variables: { id } })
             refetch()
         }
     }
 
     const onUpdate = (object) => {
-        setUpdatingId(object._id);
+        setUpdatingId(object._id)
         emailRef.current.value = object.email
-        setIsModalShown(true);
+        setIsModalShown(true)
     }
 
     const handleUpdate = async () => {
@@ -45,12 +45,12 @@ const Users = () => {
         emailRef.current.value = ''
         passwordRef.current.value = ''
 
-        const {data, error} = await updateUser({
+        const { data, error } = await updateUser({
             variables: {
                 id: updatingId,
                 email,
-                password
-            }
+                password,
+            },
         })
 
         if (error) {
@@ -60,7 +60,6 @@ const Users = () => {
             refetch()
         }
     }
-
 
     const handleSave = async () => {
         const email = emailRef.current.value
@@ -93,7 +92,12 @@ const Users = () => {
 
     return (
         <React.Fragment>
-            <List model={users} onDelete={handleOnDelete} onUpdate={onUpdate} schema={listSchema} />
+            <List
+                model={users}
+                onDelete={handleOnDelete}
+                onUpdate={onUpdate}
+                schema={listSchema}
+            />
             <div className="row">
                 <div className="col-6 d-flex">
                     <Pagination
@@ -109,7 +113,10 @@ const Users = () => {
                     <button
                         type="button"
                         className="btn btn-outline-primary btn"
-                        onClick={() => {setUpdatingId(false); setIsModalShown(true)}}
+                        onClick={() => {
+                            setUpdatingId(false)
+                            setIsModalShown(true)
+                        }}
                     >
                         Add user
                     </button>
@@ -119,7 +126,7 @@ const Users = () => {
                 id="UserAddModal"
                 title="Add New User"
                 onSave={() => {
-                    updatingId?handleUpdate():handleSave()
+                    updatingId ? handleUpdate() : handleSave()
                 }}
                 isShown={isModalShown}
                 onCancel={() => setIsModalShown(false)}

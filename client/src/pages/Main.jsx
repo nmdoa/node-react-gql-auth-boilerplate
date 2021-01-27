@@ -6,9 +6,7 @@ const Main = () => {
     const client = useContext(ClientContext)
     return (
         <Fragment>
-            <div>
-                main
-            </div>
+            <div>main</div>
             <Modal isShown={false} />
         </Fragment>
     )

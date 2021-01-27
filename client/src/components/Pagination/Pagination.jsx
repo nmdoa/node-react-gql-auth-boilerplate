@@ -41,22 +41,27 @@ const Pagination = ({ total, skip, limit, onPageChanged }) => {
                         First
                     </span>
                 </li>
-                {currentPage > 1?
-                <li className="page-item">
-                    <span className="page-link" onClick={() => onPageChanged(currentPage - 1)}>
-                        &laquo;
-                    </span>
-                </li>:null}
+                {currentPage > 1 ? (
+                    <li className="page-item">
+                        <span
+                            className="page-link"
+                            onClick={() => onPageChanged(currentPage - 1)}
+                        >
+                            &laquo;
+                        </span>
+                    </li>
+                ) : null}
                 {pagesHtml}
-                {currentPage < pages?
-                <li className="page-item">
-                    <a
-                        className="page-link"
-                        onClick={() => onPageChanged(currentPage + 1)}
-                    >
-                        &raquo;
-                    </a>
-                </li>:null}
+                {currentPage < pages ? (
+                    <li className="page-item">
+                        <a
+                            className="page-link"
+                            onClick={() => onPageChanged(currentPage + 1)}
+                        >
+                            &raquo;
+                        </a>
+                    </li>
+                ) : null}
                 <li className="page-item">
                     <a
                         className="page-link"
