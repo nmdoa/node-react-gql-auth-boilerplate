@@ -2,12 +2,14 @@ import React from 'react'
 
 import {NavItem} from './NavItem'
 
-import { UserContext } from '../../services/AuthContext'
+import useUser from "../../services/user/use";
 
 import './style.css'
 
 const Navigation = () => {
-    const { user } = UserContext()
+    const { state:{user} } = useUser()
+
+    console.log(user);
     return (
         <nav className="navbar navbar-expand-sm navbar-light bg-light px-3">
             <div className="container-md">

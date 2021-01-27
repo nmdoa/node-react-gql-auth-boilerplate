@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { earseTokens } from '../services/TokenManager'
-import { AuthContext } from '../services/AuthContext'
+import useUser from "../services/user/use";
 
 const Logout = () => {
-    const { setUser } = useContext(AuthContext)
+    const { actions: {setUser} } = useUser()
     useEffect(() => {
         return () => {
             earseTokens()

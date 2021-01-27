@@ -8,12 +8,12 @@ import './Auth.css'
 import { setTokens, setUserInfo } from '../services/TokenManager'
 import { LOGIN_USER } from '../graphql/user'
 
-import { UserContext } from '../services/AuthContext'
+import useUser from "../services/user/use";
 import Button from '../components/Button'
 
 const Auth = (props) => {
     const referer = (props.location && props.location.state && props.location.state.from) || '/';
-    const { user, setUser } = UserContext()
+    const { state:{user}, actions:{setUser} } = useUser()
     const [loginUser, { loading }] = useManualQuery(LOGIN_USER)
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()

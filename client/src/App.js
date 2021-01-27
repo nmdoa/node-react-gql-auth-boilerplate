@@ -17,14 +17,14 @@ import ProductsPage from './pages/Products'
 import Navbar from './components/Navigation/Navigation'
 import './App.css'
 
-import { AuthContext } from './services/AuthContext'
+import UserProvider from "./services/user/provider";
 
 function App() {
     const [user, setUser] = useState(getUserInfo())
     return (
         <BrowserRouter>
             <ClientContext.Provider value={GQLClient}>
-                <AuthContext.Provider value={{ user, setUser }}>
+                <UserProvider>
                     <React.Fragment>
                         <Navbar />
                         <div className="container-sm">
@@ -52,7 +52,7 @@ function App() {
                             </Switch>
                         </div>
                     </React.Fragment>
-                </AuthContext.Provider>
+                </UserProvider>
             </ClientContext.Provider>
         </BrowserRouter>
     )
