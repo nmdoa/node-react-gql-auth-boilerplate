@@ -11,7 +11,7 @@ function UserProvider({ children }) {
         <UserContext.Provider value={value}>
         {children}
         </UserContext.Provider>
-)
+    )
 }
 
 export default UserProvider
