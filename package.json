@@ -1,0 +1,43 @@
+{
+    "name": "merch-store",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "server": "nodemon app.js",
+        "client": "cd client && npm start",
+        "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+        "heroku-postbuild": "cd client && npm install && npm run build"
+    },
+    "author": "",
+    "license": "ISC",
+    "engines": {
+        "npm": "6.14.8",
+        "node": "10.16.0"
+    },
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "express": "^4.17.1",
+        "express-graphql": "^0.11.0",
+        "graphql": "^15.3.0",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.10.2"
+    },
+    "devDependencies": {
+        "concurrently": "^5.3.0",
+        "husky": "^4.3.0",
+        "lint-staged": "^10.4.0",
+        "prettier": "2.1.2"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{js,css,md}": "prettier --write"
+    }
+}

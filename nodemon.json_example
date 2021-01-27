@@ -1,0 +1,10 @@
+{
+    "env": {
+        "MONGO_USER": "mongouser",
+        "MONGO_PASSWORD": "mongopasswd",
+        "MONGO_DB": "mongodatabase",
+        "JWT_TOKEN": "-=putsecrethere=-",
+        "REFRESH_TOKEN": "-=putsecondsecrethere=-"
+    }
+    
+}
