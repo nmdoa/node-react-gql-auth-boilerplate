@@ -7,13 +7,13 @@ import { ADD_USER, LIST_USERS, DELETE_USER, UPDATE_USER } from '../graphql/user'
 import Modal from '../components/Modal'
 import UserAddForm from '../components/UserAddForm'
 import List from '../components/List'
+import {useCrud} from "../huks/CRUD";
 
 const listSchema = [0, 5, 5, 2]
 
 const Users = () => {
     const paginationLimit = 10
-    const [addUser, { loading: loadingAdd }] = useMutation(ADD_USER)
-    const [updateUser, { loading: loadingUpdate }] = useMutation(UPDATE_USER)
+    const [addUser, updateUser, deleteUser, {loadingCrud}] = useCrud(ADD_USER, UPDATE_USER, DELETE_USER);
     const [isModalShown, setIsModalShown] = useState(false)
     const [skipCount, setSkipCount] = useState(0)
     const [updatingId, setUpdatingId] = useState(false)
@@ -23,8 +23,7 @@ const Users = () => {
 
     const emailRef = useRef()
     const passwordRef = useRef()
-
-    const [deleteUser] = useMutation(DELETE_USER)
+    
     const handleOnDelete = async (id) => {
         if (window.confirm('Are you sure you want to Delete selected user?')) {
             await deleteUser({ variables: { id } })
@@ -130,7 +129,7 @@ const Users = () => {
                 }}
                 isShown={isModalShown}
                 onCancel={() => setIsModalShown(false)}
-                loading={loadingUpdate || loadingAdd}
+                loading={loadingCrud}
             >
                 <UserAddForm emailRef={emailRef} passwordRef={passwordRef} />
             </Modal>
