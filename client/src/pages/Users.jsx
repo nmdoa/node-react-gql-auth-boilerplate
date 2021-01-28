@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 
 import Pagination from '../components/Pagination/Pagination'
 
@@ -8,14 +8,13 @@ import UserAddForm from '../components/UserAddForm'
 import List from '../components/List'
 import {useCrud} from "../hooks/CRUD";
 import {useList} from "../hooks/list";
-import useUser from "../services/user/use";
 import {useUserForm} from "../hooks/userForm";
 
 const listSchema = [0, 5, 5, 2]
 
 const Users = () => {
     const [isModalShown, setIsModalShown] = useState(false)
-    const [addUser, updateUser, deleteUser, {loadingCrud}] = useCrud(ADD_USER, UPDATE_USER, DELETE_USER)
+    const [addUser, updateUser, deleteUser, {loading: loadingCrud}] = useCrud(ADD_USER, UPDATE_USER, DELETE_USER)
     const [
         loading,
         error,

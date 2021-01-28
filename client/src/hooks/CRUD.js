@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useMutation } from 'graphql-hooks'
 
 export const useCrud = (ADD_MUTATION, UPDATE_MUTATION, DELETE_MUTATION) => {
