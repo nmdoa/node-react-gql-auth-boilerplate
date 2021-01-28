@@ -6,12 +6,15 @@ import { ADD_USER, LIST_USERS, DELETE_USER, UPDATE_USER } from '../graphql/user'
 import Modal from '../components/Modal'
 import UserAddForm from '../components/UserAddForm'
 import List from '../components/List'
-import {useCrud} from "../huks/CRUD";
-import {useList} from "../huks/list";
+import {useCrud} from "../hooks/CRUD";
+import {useList} from "../hooks/list";
+import useUser from "../services/user/use";
+import {useUserForm} from "../hooks/userForm";
 
 const listSchema = [0, 5, 5, 2]
 
 const Users = () => {
+    const [isModalShown, setIsModalShown] = useState(false)
     const [addUser, updateUser, deleteUser, {loadingCrud}] = useCrud(ADD_USER, UPDATE_USER, DELETE_USER)
     const [
         loading,
@@ -22,11 +25,37 @@ const Users = () => {
         {paginationLimit}
     ] = useList(LIST_USERS)
 
-    const [isModalShown, setIsModalShown] = useState(false)
-    const [updatingId, setUpdatingId] = useState(false)
+    const {email, password, handleSubmit, handleUpdate} = useUserForm(
+        async (email, password) => {
+            const { data, error } = await addUser({
+                variables: { email, password },
+            })
+            if (error) {
+                console.log(error)
+                return false
+            } else {
+                setIsModalShown(false)
+                refetch()
+                return true
+            }
+        }, async (email, password, id) => {
+            const { data, error } = await updateUser({
+                variables: {
+                    id,
+                    email,
+                    password,
+                },
+            })
 
-    const emailRef = useRef()
-    const passwordRef = useRef()
+            if (error) {
+                console.log(error)
+                return false
+            } else {
+                setIsModalShown(false)
+                refetch()
+                return true
+            }
+        })
 
     const handleOnDelete = async (id) => {
         if (window.confirm('Are you sure you want to Delete selected user?')) {
@@ -35,70 +64,17 @@ const Users = () => {
         }
     }
 
-    const onUpdate = (object) => {
-        setUpdatingId(object._id)
-        emailRef.current.value = object.email
-        setIsModalShown(true)
-    }
-
-    const handleUpdate = async () => {
-        const email = emailRef.current.value
-        const password = passwordRef.current.value
-
-        emailRef.current.value = ''
-        passwordRef.current.value = ''
-
-        const { data, error } = await updateUser({
-            variables: {
-                id: updatingId,
-                email,
-                password,
-            },
-        })
-
-        if (error) {
-            console.log(error)
-        } else {
-            setIsModalShown(false)
-            refetch()
-        }
-    }
-
-    const handleSave = async () => {
-        const email = emailRef.current.value
-        const password = passwordRef.current.value
-
-        emailRef.current.value = ''
-        passwordRef.current.value = ''
-
-        const { data, error } = await addUser({
-            variables: { email, password },
-        })
-        if (error) {
-            console.log(error)
-        } else {
-            const createdUser = {
-                email: email,
-                password: null,
-                _id: data.createUser._id,
-            }
-            setIsModalShown(false)
-            refetch()
-        }
-    }
-
     if (!data) return 'Loading...'
     if (error) return 'Something Bad Happened'
 
     const { users, _usersMeta } = data
-    // const areMore = users.length < _usersMeta.count
 
     return (
         <React.Fragment>
             <List
                 model={users}
                 onDelete={handleOnDelete}
-                onUpdate={onUpdate}
+                onUpdate={(data) => {handleUpdate(data); setIsModalShown(true) }}
                 schema={listSchema}
             />
             <div className="row">
@@ -117,7 +93,6 @@ const Users = () => {
                         type="button"
                         className="btn btn-outline-primary btn"
                         onClick={() => {
-                            setUpdatingId(false)
                             setIsModalShown(true)
                         }}
                     >
@@ -128,14 +103,12 @@ const Users = () => {
             <Modal
                 id="UserAddModal"
                 title="Add New User"
-                onSave={() => {
-                    updatingId ? handleUpdate() : handleSave()
-                }}
+                onSave={handleSubmit}
                 isShown={isModalShown}
                 onCancel={() => setIsModalShown(false)}
                 loading={loadingCrud}
             >
-                <UserAddForm emailRef={emailRef} passwordRef={passwordRef} />
+                <UserAddForm email={email} password={password} handleSubmit={handleSubmit} />
             </Modal>
         </React.Fragment>
     )

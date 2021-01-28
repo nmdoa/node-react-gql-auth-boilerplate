@@ -13,7 +13,7 @@ export const CRUDButtons = ({ object, onDelete, onUpdate }) => {
             <button
                 type="button"
                 className="btn btn-outline-secondary"
-                onClick={() => onUpdate(object)}
+                onClick={() => onUpdate({ id: object._id, email:object.email, password:object.password})}
             >
                 edit
             </button>

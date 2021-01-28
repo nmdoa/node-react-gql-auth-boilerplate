@@ -1,8 +1,8 @@
 import React from 'react'
 
-export const UserAddForm = ({ emailRef, passwordRef }) => {
+export const UserAddForm = ({ email, password, handleSubmit }) => {
     return (
-        <form className="needs-validation">
+        <form className="needs-validation" onSubmit={handleSubmit}>
             <div className="mb-3 row">
                 <label
                     htmlFor="staticEmail"
@@ -12,12 +12,14 @@ export const UserAddForm = ({ emailRef, passwordRef }) => {
                 </label>
                 <div className="col-sm-10">
                     <input
-                        autoComplete="username"
+                        autoComplete="email"
+                        name="email"
                         type="text"
                         className="form-control"
                         id="staticEmail"
                         required
-                        ref={emailRef}
+                        {...email.bind}
+                        // value={inputs.email}
                     />
                 </div>
             </div>
@@ -31,11 +33,12 @@ export const UserAddForm = ({ emailRef, passwordRef }) => {
                 <div className="col-sm-10">
                     <input
                         autoComplete="current-password"
+                        name="password"
                         type="password"
                         className="form-control"
                         id="inputPassword"
                         required
-                        ref={passwordRef}
+                        {...password.bind}
                     />
                     <div className="invalid-feedback">
                         invalid email or password
