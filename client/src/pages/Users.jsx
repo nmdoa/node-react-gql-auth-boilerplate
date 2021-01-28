@@ -8,18 +8,23 @@ import Modal from '../components/Modal'
 import UserAddForm from '../components/UserAddForm'
 import List from '../components/List'
 import {useCrud} from "../huks/CRUD";
+import {useList} from "../huks/list";
 
 const listSchema = [0, 5, 5, 2]
 
 const Users = () => {
-    const paginationLimit = 10
-    const [addUser, updateUser, deleteUser, {loadingCrud}] = useCrud(ADD_USER, UPDATE_USER, DELETE_USER);
+    const [addUser, updateUser, deleteUser, {loadingCrud}] = useCrud(ADD_USER, UPDATE_USER, DELETE_USER)
+    const [
+        loading,
+        error,
+        data,
+        refetch,
+        {skipCount, setSkipCount},
+        {paginationLimit}
+    ] = useList(LIST_USERS)
+
     const [isModalShown, setIsModalShown] = useState(false)
-    const [skipCount, setSkipCount] = useState(0)
     const [updatingId, setUpdatingId] = useState(false)
-    const { loading, error, data, refetch } = useQuery(LIST_USERS, {
-        variables: { skip: skipCount, limit: paginationLimit },
-    })
 
     const emailRef = useRef()
     const passwordRef = useRef()
@@ -87,7 +92,7 @@ const Users = () => {
     if (error) return 'Something Bad Happened'
 
     const { users, _usersMeta } = data
-    const areMore = users.length < _usersMeta.count
+    // const areMore = users.length < _usersMeta.count
 
     return (
         <React.Fragment>
