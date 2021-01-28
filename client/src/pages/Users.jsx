@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { useQuery, useMutation, useManualQuery } from 'graphql-hooks'
 
 import Pagination from '../components/Pagination/Pagination'
 
