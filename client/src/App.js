@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { ClientContext } from 'graphql-hooks'
 
 import GQLClient from './services/GQLNetworkClient'
-import { getUserInfo } from './services/TokenManager'
 
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 
@@ -20,7 +19,6 @@ import './App.css'
 import UserProvider from './services/user/provider'
 
 function App() {
-    const [user, setUser] = useState(getUserInfo())
     return (
         <BrowserRouter>
             <ClientContext.Provider value={GQLClient}>

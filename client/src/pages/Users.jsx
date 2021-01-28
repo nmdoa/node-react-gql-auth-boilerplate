@@ -23,7 +23,7 @@ const Users = () => {
 
     const emailRef = useRef()
     const passwordRef = useRef()
-    
+
     const handleOnDelete = async (id) => {
         if (window.confirm('Are you sure you want to Delete selected user?')) {
             await deleteUser({ variables: { id } })

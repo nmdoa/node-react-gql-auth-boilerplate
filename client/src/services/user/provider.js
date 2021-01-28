@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import UserContext from './context'
+import { getUserInfo } from '../TokenManager'
 
 function UserProvider({ children }) {
-    const [user, setUser] = useState()
+    const [user, setUser] = useState(getUserInfo())
     const value = {
         state: { user },
         actions: { setUser },

@@ -11,7 +11,6 @@ const Navigation = () => {
         state: { user },
     } = useUser()
 
-    console.log(user)
     return (
         <nav className="navbar navbar-expand-sm navbar-light bg-light px-3">
             <div className="container-md">
