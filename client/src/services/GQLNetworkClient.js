@@ -21,7 +21,8 @@ gqlAxios.interceptors.response.use(
         const localRefreshToken = getRefreshToken()
 
         if (!localRefreshToken) {
-            throw new Error('unauth')
+            // throw new Error('unauth')
+            return 'error'
         }
 
         if (response.status === 500) {

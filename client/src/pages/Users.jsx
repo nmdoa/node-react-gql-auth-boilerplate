@@ -86,7 +86,7 @@ const Users = () => {
                 schema={listSchema}
             />
             <div className="row">
-                <div className="col-6 d-flex">
+                <div className="col-auto me-auto">
                     <Pagination
                         total={_usersMeta.count}
                         skip={skipCount}
@@ -96,7 +96,7 @@ const Users = () => {
                         }
                     />
                 </div>
-                <div className="col-6 d-flex justify-content-end">
+                <div className="col-auto">
                     <button
                         type="button"
                         className="btn btn-outline-primary btn"

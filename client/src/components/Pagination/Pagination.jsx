@@ -31,47 +31,39 @@ const Pagination = ({ total, skip, limit, onPageChanged }) => {
     }
 
     return (
-        <nav aria-label="...">
-            <ul className="pagination justify-content-end">
+        <ul className="pagination">
+            <li className="page-item">
+                <span className="page-link" onClick={() => onPageChanged(1)}>
+                    First
+                </span>
+            </li>
+            {currentPage > 1 ? (
                 <li className="page-item">
                     <span
                         className="page-link"
-                        onClick={() => onPageChanged(1)}
+                        onClick={() => onPageChanged(currentPage - 1)}
                     >
-                        First
+                        &laquo;
                     </span>
                 </li>
-                {currentPage > 1 ? (
-                    <li className="page-item">
-                        <span
-                            className="page-link"
-                            onClick={() => onPageChanged(currentPage - 1)}
-                        >
-                            &laquo;
-                        </span>
-                    </li>
-                ) : null}
-                {pagesHtml}
-                {currentPage < pages ? (
-                    <li className="page-item">
-                        <a
-                            className="page-link"
-                            onClick={() => onPageChanged(currentPage + 1)}
-                        >
-                            &raquo;
-                        </a>
-                    </li>
-                ) : null}
+            ) : null}
+            {pagesHtml}
+            {currentPage < pages ? (
                 <li className="page-item">
                     <a
                         className="page-link"
-                        onClick={() => onPageChanged(pages)}
+                        onClick={() => onPageChanged(currentPage + 1)}
                     >
-                        Last
+                        &raquo;
                     </a>
                 </li>
-            </ul>
-        </nav>
+            ) : null}
+            <li className="page-item">
+                <a className="page-link" onClick={() => onPageChanged(pages)}>
+                    Last
+                </a>
+            </li>
+        </ul>
     )
 }
 
